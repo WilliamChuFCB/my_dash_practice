@@ -2,11 +2,13 @@ from dash import Dash, html, dcc, Input, Output, callback
 import pandas as pd
 import plotly.express as px
 import pycountry_convert as pc
+import os
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 # define dash app and utilize an external style sheet
 app = Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 
 # data reading and preprocessing
 df = pd.read_csv('https://plotly.github.io/datasets/country_indicators.csv')
@@ -266,8 +268,10 @@ def update_scatter_matrix(value):
     fig.update_layout(width=1500, height=640)
     return fig
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="127.0.0.1", port=port)
+
 
 
 
