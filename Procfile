@@ -1,1 +1,1 @@
-web: python mydash.py
+web: gunicorn mydash:server
